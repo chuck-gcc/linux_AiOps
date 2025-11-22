@@ -1,7 +1,7 @@
 #ifndef BASH_AGENT_H
 #define BASH_AGENT_H
 
-#define IP "127.0.0.0"
+#define IP "127.0.0.1"
 #define PORT 8000
 
 
@@ -41,5 +41,6 @@ int stop_thread(pthread_t *threads, t_log_file **files, size_t size);
 int start_thread(pthread_t *threads, t_log_file **files, size_t size);
 int send_log(int *sock_fd, char *log);
 int open_and_connect_socket_and_send(char *log);
-int close_socket(int *fd_socket);
+
+char  *process_message(char *line, char *path);
 #endif

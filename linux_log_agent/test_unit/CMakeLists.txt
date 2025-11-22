@@ -6,7 +6,7 @@ file(GLOB HEAD ../include)
 
 add_compile_options(-Wall -Wextra -Werror)
 
-set(LIBFT /home/cc/gpu_lab/log_agent/bash_agent_ia/libft/libft.a)
+set(LIBFT /home/cc/gpu_lab/log_agent/linux_log_agent/libft/libft.a)
 
 
 add_executable(test_1  ${TEST_UNIT} ${SRCS})

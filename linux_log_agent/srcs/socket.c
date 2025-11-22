@@ -1,7 +1,5 @@
 #include "../include/bash_agent.h"
 
-#define IP "127.0.0.0"
-#define PORT 8000
 
 int open_and_connect_socket_and_send(char *log)
 {
@@ -39,8 +37,7 @@ int open_and_connect_socket_and_send(char *log)
 
     }
     buffer[b] = '\0';
-    printf("response %s\n", buffer);
-    close_socket(&sock_fd);
+    shutdown(sock_fd, 2);
     return(0);
 }
 

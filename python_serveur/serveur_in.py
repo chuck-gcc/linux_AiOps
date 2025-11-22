@@ -1,5 +1,5 @@
 import socket
-
+from serveur_log import thread_log
 
 def run_serveur_in():
 
@@ -18,12 +18,11 @@ def run_serveur_in():
         client_socket, client_address = server.accept()
         request = client_socket.recv(1024)
         request = request.decode("utf-8")
-        print(request)
 
         response = "accept".encode("utf-8")
         client_socket.send(response)
         client_socket.close()
-        
+        thread_log(request)
         # convert and send accept response to the client
         # convert and send accept response to the client
     server.close()

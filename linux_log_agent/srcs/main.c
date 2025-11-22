@@ -109,9 +109,7 @@ int main(int argc, char **argv)
         return(1);
     }
 
-    
     stop_thread(threads, files, argc - 1);
-
     clean_struct(files, argc);
     return 0;
 }

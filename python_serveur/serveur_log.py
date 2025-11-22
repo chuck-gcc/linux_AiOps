@@ -33,18 +33,18 @@ class Log():
         )
     
 def get_json_log(log: str) -> Log :
-    split = log.split(" ", 3)
+    split = log.split(" ", 4)
     # for data in split:
     #     print(data)
-
     obj = Log()
-    obj.timestamp = split[0];
-    obj.host = split[1];
+    obj.file = split[0];
+    obj.timestamp = split[1];
+    obj.host = split[2];
     start = split[2].find("[") + 1
     end = split[2].find("]")
-    obj.process = split[2][0:start - 1]
-    obj.pid = split[2][start:end];
-    obj.message = split[3]
+    obj.process = split[3][0:start - 1]
+    obj.pid = split[3][start:end];
+    obj.message = split[4]
     obj.event_type = ""
     obj.facility = ""
     obj.prev_hash = ""
