@@ -12,7 +12,7 @@ Les paramètres réseau sont définis dans :
 
 Chaque fichier passé en argument est surveillé dans un thread dédié à l’aide de la bibliothèque **inotify**.
 
-Lorsqu’une nouvelle ligne est détectée dans un fichier :
+Lorsqu’une nouvelle ligne de log est détectée dans un fichier :
 
 1. un socket est créé,
 2. le log est envoyé au serveur,  
@@ -28,3 +28,8 @@ cmake -B build && cmake --build build
 
 ```bash
 ./build/srcs/iagent /var/log/auth.log /var/log/kern.log ...
+```
+
+# python server
+
+ 
