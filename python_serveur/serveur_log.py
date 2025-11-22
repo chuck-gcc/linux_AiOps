@@ -14,6 +14,11 @@ import threading
 #   "prev_hash":""
 # }
 
+class Log_dpkg():
+    date: str
+    hour: str
+    
+
 class Log():
     file: str
     timestamp:str
