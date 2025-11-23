@@ -64,9 +64,17 @@ CONTEXT=--context-shift
 CONTEXT_SIZE= -c 4096
 #Modeles Path
 GPTOSS=-m /data/models/gguf_models/gpt-oss-20b-GGUF/gpt-oss-20b-F16.gguf
+
 QVL8I=-m /data/models/gguf_models/Qwen3-VL-8B-Instruct-GGUF/Qwen3VL-8B-Instruct-F16.gguf 
+QVL8IMM=--mmproj /data/models/gguf_models/Qwen3-VL-8B-Instruct-GGUF/mmproj-Qwen3VL-8B-Instruct-F16.gguf
+
 QVL8T=-m /data/models/gguf_models/Qwen3-VL-8B-Thinking-GGUF/Qwen3VL-8B-Thinking-F16.gguf 
-QVL32I=-m /data/models/models/gguf_models/Qwen3-VL-32B-Instruct-GGUF/Qwen3VL-32B-Instruct-F16-merged.gguf 
+QVL8TMM=-m /data/models/gguf_models/Qwen3-VL-8B-Thinking-GGUF/mmproj-Qwen3VL-8B-Thinking-F16.gguf
+
+QVL32I=-m /data/models/gguf_models/Qwen3-VL-32B-Instruct-GGUF/Qwen3VL-32B-Instruct-F16-merged.gguf 
+QVL32IMM=-m /data/models/gguf_models/Qwen3-VL-32B-Instruct-GGUF/mmproj-Qwen3VL-32B-Instruct-F16.gguf 
+
+QC30=-m /data/models/gguf_models/Qwen3-Coder-30B-A3B-Instruct-GGUF/Qwen3-Coder-30B-A3B-Instruct-UD-Q8_K_XL.gguf 
 
 
 
@@ -77,21 +85,25 @@ gpt:
 
 # qwen3 VL 8B Instruct
 q8i:
-	docker exec -it  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL8I) $(OFFLINE)
+	docker exec -it  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL8I) $(QVL8IMM) $(OFFLINE)
 	@echo qwen3 VL 8B Instruct is now runnig on 127.0.0.1:8080
 # qwen3 VL 8B Thinking
 q8t:
-	docker exec -itd  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL8T) $(OFFLINE)
+	docker exec -itd  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL8T) $(QVL8TMM) $(OFFLINE)
 	@echo qwen3 VL 8B Thinking is now runnig on 127.0.0.1:8080
 
 # qwen3 VL 32B Instruct
 q32i:
-	docker exec -itd  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL32I) $(OFFLINE)
+	docker exec -itd  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QVL32I) $(QVL32IMM) $(OFFLINE)
 	@echo qwen3 VL 32B Instruct is now runnig on 127.0.0.1:8080
+
+# qwen3 Coder 30b
+q30c:
+	docker exec -itd  $(DOCK_NAME)  $(SERVER_PATH) $(NGL) $(FLASH_ATT) $(QC30) $(OFFLINE)
 
 llmstop:
 	docker exec -it $(DOCK_NAME)  bash -c 'kill -9 $$(pidof llama-server)'
 	@echo llama server is off
 
 
-llm: dstart gpt
+llm: dstart q30c
